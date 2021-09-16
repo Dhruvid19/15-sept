@@ -1,32 +1,18 @@
-<!DOCTYPE html>
+<?php require('partials/head.php'); ?>
 
-<html lang="en">
+<?php foreach ($users as $user) :?>
+    <li><?= $user->name;?></li>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-
-<body>
+<?php endforeach; ?>
 
 
-    <nav>
-        <ul>
-            <li><a href="/about.php">About page</a></li>
-            <li><a href="/contact.php">Contact page</a></li>
-        </ul>
-    </nav>
-    <h1>My Tasks</h1>
 
-    <?php foreach ($tasks as $task) : ?>
-        <li>
-            <?php if($task->completed) : ?>
-                <strike><?= $task->description; ?></strike>
-            <?php else : ?>
-                <?= $task->description; ?>
-            <?php endif; ?>
+    
+<h1>Submit Your Name</h1>
 
-        </li>
-        <?php endforeach; ?>
-</body>
-</html>
+<form method="POST" action="/names">
+    <input name="name"></input>
+    <button type="submit">Submit</button>
+</form>
+
+ <?php require('partials/footer.php'); ?>

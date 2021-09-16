@@ -2,17 +2,37 @@
 
 class Router
 {
-    protected $routes = [];
+    public $routes = [
 
-    public function define($routes)
+        'GET' => [],
+        'POST' => []
+
+    ];
+
+    public static function load($file)
     {
-        $this->routes = $routes;
+        $router = new static;
+        require $file;
+        return $router;
     }
 
-    public function direct($uri)
+
+   
+
+    public function post($uri, $controller)
     {
-        if(array_key_exists($uri, $this->routes)) {
-            return $this->routes['about/culture'];
+       
+        $this->routes['POST'][$uri] = $controller;
+    }
+
+
+
+
+
+    public function direct($uri, $_RequestType)
+    {
+        if(array_key_exists($uri, $this->routes[$_RequestType])) {
+            return $this->routes[$_RequestType][$uri];
         }
 
         throw new Exception('No route defined for this URI');
